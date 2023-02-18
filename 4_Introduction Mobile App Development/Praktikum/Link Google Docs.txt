@@ -1,5 +1,10 @@
 https://docs.google.com/document/d/1lWb2fQuo_1py_InztGqI-1s8_2jrTAP-/edit?usp=share_link&ouid=107856111600073164241&rtpof=true&sd=true
+<<<<<<< HEAD
 
 https://docs.google.com/document/d/1WmxkklIQ62Jhqqz6-ghGLRs7AHpmPgw3/edit?usp=share_link&ouid=107856111600073164241&rtpof=true&sd=true
 
 https://docs.google.com/document/d/1bcm2kJq-mDpvh80T72vCRu5r_glm7RIh/edit?usp=share_link&ouid=107856111600073164241&rtpof=true&sd=true
+=======
+https://docs.google.com/document/d/1WmxkklIQ62Jhqqz6-ghGLRs7AHpmPgw3/edit?usp=share_link&ouid=107856111600073164241&rtpof=true&sd=true
+https://docs.google.com/document/d/1bcm2kJq-mDpvh80T72vCRu5r_glm7RIh/edit?usp=share_link&ouid=107856111600073164241&rtpof=true&sd=true
+>>>>>>> 5cbfea5f5c93b2d1d1464e052ecec3c8a8cd9825
