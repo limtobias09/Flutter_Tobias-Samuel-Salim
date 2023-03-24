@@ -131,66 +131,66 @@ class HomePage1 extends StatelessWidget {
   //'EdgeInsets.fromLTRB' adalah widget agar kita dapat custom mau kasih jarak berapa untuk kiri, atas, kanan, dan bawah dari child widget
   //'MainAxisAlignment.start' merupakan sebuah widget yang dalam kasus ini children nya akan mulai dari atas AppBar
   //Ada juga 'MainAxisAlignment.end' yang merupakan kebalikan dari 'MainAxisAlignment.start'
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-
-          const Icon(
-          Icons.perm_contact_calendar_rounded,
-            ),
-
-            //'SizedBox' merupakan sebuah widget kotak kosong dengan lebar yang sama dengan widget sebelumnya
-            //Fungsi 'SizedBox' adalah untuk memberikan jarak, dalam kasus ini antara icon dan text 'Create New Contacts'
-            //Meskipun tidak satu kurung dengan text, penempatan SizedBox tetap sangat berpengaruh dan menentukan apa yang diberi jarak
-            const SizedBox(height: 10.0),
-
-            const Text(
-              'Create New Contacts',
-              style: TextStyle(
-                fontSize: 20.0,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+      
+      
+            const Icon(
+            Icons.perm_contact_calendar_rounded,
               ),
-             ),
-
-            const SizedBox(height: 10.0),
-
-            //Widget 'Container' digunakan untuk mengatur tampilan atau layout widget lainnya
-            //'Container' bisa atur ukuran, warna, margin dan padding, dekorasi, transformasi
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+      
+              //'SizedBox' merupakan sebuah widget kotak kosong dengan lebar yang sama dengan widget sebelumnya
+              //Fungsi 'SizedBox' adalah untuk memberikan jarak, dalam kasus ini antara icon dan text 'Create New Contacts'
+              //Meskipun tidak satu kurung dengan text, penempatan SizedBox tetap sangat berpengaruh dan menentukan apa yang diberi jarak
+              const SizedBox(height: 10.0),
+      
+              const Text(
+                'Create New Contacts',
+                style: TextStyle(
+                  fontSize: 20.0,
                 ),
                ),
-              
-              //'child' adalah properti dari widget 'Dialog'untuk menentukan konten yang akan ditampilkan
-              //Dalam kasus ini, 'child' diisi dengan widget 'Padding'
-              //'EdgeInsets.symmetric' adalah objek dari kelas 'EdgeInsets' untuk atur ukuran padding/jarak
-              //'EdgeInsets.symmetric(horizontal:' artinya text dalam Padding akan memiliki jarak yang sama untuk kiri dan kanan nya
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(10,10,10,10), 
-                child: Text(
-                  'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.',
-                 style: TextStyle(
-                  fontSize: 16.0,
+      
+              const SizedBox(height: 10.0),
+      
+              //Widget 'Container' digunakan untuk mengatur tampilan atau layout widget lainnya
+              //'Container' bisa atur ukuran, warna, margin dan padding, dekorasi, transformasi
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                  ),
                  ),
+                
+                //'child' adalah properti dari widget 'Dialog'untuk menentukan konten yang akan ditampilkan
+                //Dalam kasus ini, 'child' diisi dengan widget 'Padding'
+                //'EdgeInsets.symmetric' adalah objek dari kelas 'EdgeInsets' untuk atur ukuran padding/jarak
+                //'EdgeInsets.symmetric(horizontal:' artinya text dalam Padding akan memiliki jarak yang sama untuk kiri dan kanan nya
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(10,10,10,10), 
+                  child: Text(
+                    'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.',
+                   style: TextStyle(
+                    fontSize: 16.0,
+                   ),
+                  ),
                 ),
-              ),
-
-             ),
-
-      //Diperlukan widget 'Expanded' karena ada tambahan child dalam body nya yaitu form input nama dan nomor telpon yang sifatnya stateful
-             const Expanded(
-              child: ContactList(),
-              ),
-            ],
-          ),
-         ),
+      
+               ),
+      
+        //Diperlukan widget 'Expanded' karena ada tambahan child dalam body nya yaitu form input nama dan nomor telpon yang sifatnya stateful
+               const ContactList(),
+              ],
+            ),
+           ),
+      ),
         floatingActionButton: FloatingActionButton(
         onPressed:(){
           Navigator.pop(
@@ -280,231 +280,228 @@ void addColor(){
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //'SingleChildScrollView(' adalah widget untuk membuat semua yang ada dalam kurungnya scroll bersama-sama bukan terpisah
-      body: SingleChildScrollView(
-        child: Form(
-        key: _formkey,
-        child: Container(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(
-            children: [
-        
-          TextField(
+    //Tidak usah pake Scaffold, langsung 'Form' saja karena hanya tambah di body yang Scaffoldnya di HomePage2
+    //Kalau pake Scaffold nanti bentrok dengan body 'SingleScrollChildView' di HomePage2
+    return Form(
+      key: _formkey,
+      child: Container(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+      
+        TextField(
 
-            //'controller' digunakan untuk dapat membaca teks yang diinput user pada 'TextField'
-            //Selain itu, juga dapat memperbarui atau menghapus teks yang diinput
-            //'controller' dapat digunakan untuk mengatur teks default atau mengosongkan teks pada 'TextField'
-            controller:_nameController,
-            decoration: const InputDecoration(
-              labelText: 'Name',
-              labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Insert Your Name',
-              hintStyle: TextStyle(color: Colors.black),
+          //'controller' digunakan untuk dapat membaca teks yang diinput user pada 'TextField'
+          //Selain itu, juga dapat memperbarui atau menghapus teks yang diinput
+          //'controller' dapat digunakan untuk mengatur teks default atau mengosongkan teks pada 'TextField'
+          controller:_nameController,
+          decoration: const InputDecoration(
+            labelText: 'Name',
+            labelStyle: TextStyle(color: Colors.black),
+            hintText: 'Insert Your Name',
+            hintStyle: TextStyle(color: Colors.black),
 
-              //'filled' gunanya adalah agar dapat memiliki background color pada TextField nya
-              filled: true,
-              fillColor:  Color.fromARGB(255, 225, 213, 227),
+            //'filled' gunanya adalah agar dapat memiliki background color pada TextField nya
+            filled: true,
+            fillColor:  Color.fromARGB(255, 225, 213, 227),
 
-              //'FloatingLabelBehavior.always' digunakan untuk 'hintText' selalu tampil di 'TextField' meskipun kita tidak klik 'TextField'
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-            ),
+            //'FloatingLabelBehavior.always' digunakan untuk 'hintText' selalu tampil di 'TextField' meskipun kita tidak klik 'TextField'
+            floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
-          
-          const SizedBox(height: 20.0),
+        ),
         
-          TextField(
-            controller: _phoneController,
-                decoration: const InputDecoration(
-                  labelText: 'Nomor',
-                  labelStyle: TextStyle(color: Colors.black),
-                  hintText: '+62...',
-                  hintStyle: TextStyle(color: Colors.black),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 225, 213, 227),
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-               ),
-
-          const SizedBox(height: 20.0),
-
-          buildDatePicker(context),
-
-          buildColorPicker(context),
-          const SizedBox(height: 20),
-
-          buildFilePicker(context),
-        
-          Align(
-            alignment: Alignment.bottomRight,
-            child: ElevatedButton(
-              onPressed: (){
-              addContact();
-               }, 
-              child: const Text('Submit'),
-              style: ElevatedButton.styleFrom(
-                 backgroundColor:const Color.fromARGB(255, 127, 39, 143),
-                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                 )
+        const SizedBox(height: 20.0),
+      
+        TextField(
+          controller: _phoneController,
+              decoration: const InputDecoration(
+                labelText: 'Nomor',
+                labelStyle: TextStyle(color: Colors.black),
+                hintText: '+62...',
+                hintStyle: TextStyle(color: Colors.black),
+                filled: true,
+                fillColor: Color.fromARGB(255, 225, 213, 227),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
              ),
+
+        const SizedBox(height: 20.0),
+
+        buildDatePicker(context),
+
+        buildColorPicker(context),
+        const SizedBox(height: 20),
+
+        buildFilePicker(context),
+      
+        Align(
+          alignment: Alignment.bottomRight,
+          child: ElevatedButton(
+            onPressed: (){
+            addContact();
+             }, 
+            child: const Text('Submit'),
+            style: ElevatedButton.styleFrom(
+               backgroundColor:const Color.fromARGB(255, 127, 39, 143),
+               shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+               )
+            ),
+           ),
+        ),
+      
+        const Text(
+          'List Contacts',
+          style: TextStyle(
+            fontSize: 20.0,
           ),
-        
-          const Text(
-            'List Contacts',
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-            ),
-        
-          Container(
+          ),
+      
+        Container(
 
-            //'height: MediaQuery.of(context).size.height' adalah untuk mengambil height dari layar pada saat aplikasi dijalankan
-            //'height: MediaQuery.of(context).size.height' membuat tampilan yang responsif dan menyesuaikan ukurannya dengan layar perangkat
-            height: MediaQuery.of(context).size.height,
-            child: ListView.separated(
-              itemBuilder:(context, index){
-                return ListTile(
-                 trailing: SizedBox(
-                  width: 96,
-                  child: Row(
+          //'height: MediaQuery.of(context).size.height' adalah untuk mengambil height dari layar pada saat aplikasi dijalankan
+          //'height: MediaQuery.of(context).size.height' membuat tampilan yang responsif dan menyesuaikan ukurannya dengan layar perangkat
+          height: MediaQuery.of(context).size.height,
+          child: ListView.separated(
+            itemBuilder:(context, index){
+              return ListTile(
+               trailing: SizedBox(
+                width: 96,
+                child: Row(
 
-                   //Dalam children yang diposisikan bersampingan ('Row') terdapat 2 IconButton yaitu 'Edit' dan 'Delete' 
-                   children: [
+                 //Dalam children yang diposisikan bersampingan ('Row') terdapat 2 IconButton yaitu 'Edit' dan 'Delete' 
+                 children: [
 
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: (){
-                        
-                        //Saat di klik tombol 'Edit' kita dapat mengedit nama dan nomor telepon karena ada controller
-                        TextEditingController _nameController=TextEditingController(text: _contacts[index]['name']);
-                        TextEditingController _phoneController=TextEditingController(text: _contacts[index]['phone']);
-                        
-                        //Dan saat di klik tombol 'Edit' akan muncul dialog
-                        showDialog(
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: (){
+                      
+                      //Saat di klik tombol 'Edit' kita dapat mengedit nama dan nomor telepon karena ada controller
+                      TextEditingController _nameController=TextEditingController(text: _contacts[index]['name']);
+                      TextEditingController _phoneController=TextEditingController(text: _contacts[index]['phone']);
+                      
+                      //Dan saat di klik tombol 'Edit' akan muncul dialog
+                      showDialog(
 
-                          //'context: context' adalah objek dari BuildContext untuk identifikasi (penanda) widget mana yang memanggil dialog
-                          context: context, 
-                          builder: (context){
-                            return AlertDialog(
-                            title: const Text('Edit Contact'),
-                            content: Column(
+                        //'context: context' adalah objek dari BuildContext untuk identifikasi (penanda) widget mana yang memanggil dialog
+                        context: context, 
+                        builder: (context){
+                          return AlertDialog(
+                          title: const Text('Edit Contact'),
+                          content: Column(
 
 
-                              //'mainAxisSize: MainAxisSize.min' digunakan untuk menentukan ukuran utama dari widget Column
-                              //Artinya ukuran utama dari widget Column akan menyesuaikan dengan isi konten di dalamnya
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextField(
-                                  controller: _nameController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Name',
-                                  ),
+                            //'mainAxisSize: MainAxisSize.min' digunakan untuk menentukan ukuran utama dari widget Column
+                            //Artinya ukuran utama dari widget Column akan menyesuaikan dengan isi konten di dalamnya
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                controller: _nameController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Name',
                                 ),
-                                TextField(
-                                  controller: _phoneController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Phone',
-                                  ),
+                              ),
+                              TextField(
+                                controller: _phoneController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Phone',
                                 ),
-                              ],
-                            ),
-
-                            //Di dalam AlertDialog terdapat beberapa actions yang terdiri dari TextButton dan ElevatedButton
-                            //TextButton untuk tombol Cancel, dimana saat di klik tombol tersebut akan kembali ke 'context' dari builder
-                            actions: [
-                              TextButton(
-                                onPressed: ()=>Navigator.pop(context), 
-                                child: const Text('Cancel'),
-                                ),
-
-                                //ElevatedButton untuk tombol save, dimana saat di klik tombol tersebut akan menampilkan nama atau nomor yang diedit
-                                //Kemudian dilanjutkan dengan kembali ke 'context' builder
-                                ElevatedButton(
-                                  onPressed: (){
-                                    String newName=_nameController.text;
-                                    String newPhone= _phoneController.text;
-        
-                                    setState(() {
-                                      _contacts[index]['name']=newName;
-                                      _contacts[index]['phone']=newPhone;
-                                    });
-                                    Navigator.pop(context);
-                                  }, 
-                                  child: const Text('Save'),
-                                  ),
+                              ),
                             ],
+                          ),
+
+                          //Di dalam AlertDialog terdapat beberapa actions yang terdiri dari TextButton dan ElevatedButton
+                          //TextButton untuk tombol Cancel, dimana saat di klik tombol tersebut akan kembali ke 'context' dari builder
+                          actions: [
+                            TextButton(
+                              onPressed: ()=>Navigator.pop(context), 
+                              child: const Text('Cancel'),
+                              ),
+
+                              //ElevatedButton untuk tombol save, dimana saat di klik tombol tersebut akan menampilkan nama atau nomor yang diedit
+                              //Kemudian dilanjutkan dengan kembali ke 'context' builder
+                              ElevatedButton(
+                                onPressed: (){
+                                  String newName=_nameController.text;
+                                  String newPhone= _phoneController.text;
+      
+                                  setState(() {
+                                    _contacts[index]['name']=newName;
+                                    _contacts[index]['phone']=newPhone;
+                                  });
+                                  Navigator.pop(context);
+                                }, 
+                                child: const Text('Save'),
+                                ),
+                          ],
+                          );
+                        },
+                        );
+                    }, 
+                    ),
+      
+                    
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: (){
+      
+                      TextEditingController _nameController=TextEditingController(text: _contacts[index]['name']);
+                      TextEditingController _phoneController=TextEditingController(text: _contacts[index]['phone']); 
+      
+                      showDialog(
+                        context: context, 
+                        builder: (context){
+                          return AlertDialog(
+                            title: Text('Delete Contact'),
+                            content: Text('Are you sure you want to delete ${_contacts[index]['name']}\'s contact?'),
+                            actions: [
+                                TextButton(
+                                  onPressed: ()=>Navigator.pop(context), 
+                                  child: const Text('Cancel'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: (){
+
+                                      //Saat kita klik tombol 'Delete', contact tersebut akan hilang menggunakan '_contacts.removeAt(index)'
+                                      setState(() {
+                                        _contacts.removeAt(index);
+                                      });
+                                      Navigator.pop(context);
+                                    }, 
+                                    child:const Text('Delete'),
+                                    ),
+                              ],
                             );
-                          },
+                          }
                           );
                       }, 
                       ),
-        
-                      
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: (){
-        
-                        TextEditingController _nameController=TextEditingController(text: _contacts[index]['name']);
-                        TextEditingController _phoneController=TextEditingController(text: _contacts[index]['phone']); 
-        
-                        showDialog(
-                          context: context, 
-                          builder: (context){
-                            return AlertDialog(
-                              title: Text('Delete Contact'),
-                              content: Text('Are you sure you want to delete ${_contacts[index]['name']}\'s contact?'),
-                              actions: [
-                                  TextButton(
-                                    onPressed: ()=>Navigator.pop(context), 
-                                    child: const Text('Cancel'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: (){
-
-                                        //Saat kita klik tombol 'Delete', contact tersebut akan hilang menggunakan '_contacts.removeAt(index)'
-                                        setState(() {
-                                          _contacts.removeAt(index);
-                                        });
-                                        Navigator.pop(context);
-                                      }, 
-                                      child:const Text('Delete'),
-                                      ),
-                                ],
-                              );
-                            }
-                            );
-                        }, 
-                        ),
-                   ],
-                 ),
-                ),
-
-                //Tiap 'ListTile' akan ada lingkaran/'CircleAvatar' yang dalamnya adalah huruf awal dari 'name'
-                //'_contacts[index]['name']' fungsinya untuk mengambil nilai yang berhubungan dengan 'name' dalam Map
-                //Ada tanda seru '!' dibelakang '['name]' menunjukkan bahwa nilai yang diambil dari '_contacts[index]' tidak null
-                 leading: CircleAvatar(
-                 child: Text(getFirstLetter(_contacts[index]['name']!)),                
-                 ),
-                 title: Text(_contacts[index]['name']!),
-                 subtitle: Text(_contacts[index]['phone']!),
-                );
-              }, 
-
-              //'separatorBuilder' untuk menambahkan widget pemisah antara setiap item dalam daftar
-              //'const Divider()' sebagai pemisah antara setiap item dalam daftar
-              //'itemCount' untuk menentukan jumlah item dalam daftar, dalam kasus ini semua list '_contacts'
-              separatorBuilder: (context,index)=>const Divider(), 
-              itemCount: _contacts.length,
+                 ],
+               ),
               ),
-             ),
-          ],
-        ),
-         ),
-        ),
+
+              //Tiap 'ListTile' akan ada lingkaran/'CircleAvatar' yang dalamnya adalah huruf awal dari 'name'
+              //'_contacts[index]['name']' fungsinya untuk mengambil nilai yang berhubungan dengan 'name' dalam Map
+              //Ada tanda seru '!' dibelakang '['name]' menunjukkan bahwa nilai yang diambil dari '_contacts[index]' tidak null
+               leading: CircleAvatar(
+               child: Text(getFirstLetter(_contacts[index]['name']!)),                
+               ),
+               title: Text(_contacts[index]['name']!),
+               subtitle: Text(_contacts[index]['phone']!),
+              );
+            }, 
+
+            //'separatorBuilder' untuk menambahkan widget pemisah antara setiap item dalam daftar
+            //'const Divider()' sebagai pemisah antara setiap item dalam daftar
+            //'itemCount' untuk menentukan jumlah item dalam daftar, dalam kasus ini semua list '_contacts'
+            separatorBuilder: (context,index)=>const Divider(), 
+            itemCount: _contacts.length,
+            ),
+           ),
+        ],
       ),
-    );
+       ),
+      );
    }
 
    Widget buildDatePicker(BuildContext context){
