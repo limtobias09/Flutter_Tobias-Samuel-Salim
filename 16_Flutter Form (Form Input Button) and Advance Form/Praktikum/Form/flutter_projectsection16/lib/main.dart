@@ -125,66 +125,67 @@ class HomePage1 extends StatelessWidget {
   //'EdgeInsets.fromLTRB' adalah widget agar kita dapat custom mau kasih jarak berapa untuk kiri, atas, kanan, dan bawah dari child widget
   //'MainAxisAlignment.start' merupakan sebuah widget yang dalam kasus ini children nya akan mulai dari atas AppBar
   //Ada juga 'MainAxisAlignment.end' yang merupakan kebalikan dari 'MainAxisAlignment.start'
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-
-          const Icon(
-          Icons.perm_contact_calendar_rounded,
-            ),
-
-            //'SizedBox' merupakan sebuah widget kotak kosong dengan lebar yang sama dengan widget sebelumnya
-            //Fungsi 'SizedBox' adalah untuk memberikan jarak, dalam kasus ini antara icon dan text 'Create New Contacts'
-            //Meskipun tidak satu kurung dengan text, penempatan SizedBox tetap sangat berpengaruh dan menentukan apa yang diberi jarak
-            const SizedBox(height: 10.0),
-
-            const Text(
-              'Create New Contacts',
-              style: TextStyle(
-                fontSize: 20.0,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+      
+      
+            const Icon(
+            Icons.perm_contact_calendar_rounded,
               ),
-             ),
-
-            const SizedBox(height: 10.0),
-
-            //Widget 'Container' digunakan untuk mengatur tampilan atau layout widget lainnya
-            //'Container' bisa atur ukuran, warna, margin dan padding, dekorasi, transformasi
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+      
+              //'SizedBox' merupakan sebuah widget kotak kosong dengan lebar yang sama dengan widget sebelumnya
+              //Fungsi 'SizedBox' adalah untuk memberikan jarak, dalam kasus ini antara icon dan text 'Create New Contacts'
+              //Meskipun tidak satu kurung dengan text, penempatan SizedBox tetap sangat berpengaruh dan menentukan apa yang diberi jarak
+              const SizedBox(height: 10.0),
+      
+              const Text(
+                'Create New Contacts',
+                style: TextStyle(
+                  fontSize: 20.0,
                 ),
                ),
-              
-              //'child' adalah properti dari widget 'Dialog'untuk menentukan konten yang akan ditampilkan
-              //Dalam kasus ini, 'child' diisi dengan widget 'Padding'
-              //'EdgeInsets.symmetric' adalah objek dari kelas 'EdgeInsets' untuk atur ukuran padding/jarak
-              //'EdgeInsets.symmetric(horizontal:' artinya text dalam Padding akan memiliki jarak yang sama untuk kiri dan kanan nya
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(10,10,10,10), 
-                child: Text(
-                  'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.',
-                 style: TextStyle(
-                  fontSize: 16.0,
+      
+              const SizedBox(height: 10.0),
+      
+              //Widget 'Container' digunakan untuk mengatur tampilan atau layout widget lainnya
+              //'Container' bisa atur ukuran, warna, margin dan padding, dekorasi, transformasi
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                  ),
                  ),
+                
+                //'child' adalah properti dari widget 'Dialog'untuk menentukan konten yang akan ditampilkan
+                //Dalam kasus ini, 'child' diisi dengan widget 'Padding'
+                //'EdgeInsets.symmetric' adalah objek dari kelas 'EdgeInsets' untuk atur ukuran padding/jarak
+                //'EdgeInsets.symmetric(horizontal:' artinya text dalam Padding akan memiliki jarak yang sama untuk kiri dan kanan nya
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(10,10,10,10), 
+                  child: Text(
+                    'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.',
+                   style: TextStyle(
+                    fontSize: 16.0,
+                   ),
+                  ),
                 ),
-              ),
+      
+               ),
+      
+               const ContactList(),
 
-             ),
 
-      //Diperlukan widget 'Expanded' karena ada tambahan child dalam body nya yaitu form input nama dan nomor telpon yang sifatnya stateful
-             const Expanded(
-              child: ContactList(),
-              ),
-            ],
-          ),
-         ),
+              ],
+            ),
+           ),
+      ),
         floatingActionButton: FloatingActionButton(
         onPressed:(){
           Navigator.pop(
@@ -265,13 +266,12 @@ void dispose(){
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //'SingleChildScrollView(' adalah widget untuk membuat semua yang ada dalam kurungnya scroll bersama-sama bukan terpisah
-      body: SingleChildScrollView(
-        child: Form(
+    return Form(
+      //Tidak usah pake Scaffold, langsung 'Form' saja karena hanya tambah di body yang Scaffoldnya di HomePage2
+     //Kalau pake Scaffold nanti bentrok dengan body 'SingleScrollChildView' di HomePage2
         key: _formkey,
         child: Container(
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
         
@@ -476,8 +476,6 @@ void dispose(){
           ],
         ),
          ),
-        ),
-      ),
-    );
+        );
    }
   }
