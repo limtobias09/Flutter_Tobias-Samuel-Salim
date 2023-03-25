@@ -83,7 +83,7 @@ class HomePage1 extends StatelessWidget {
 
 
 
- class HomePage2 extends StatelessWidget {
+class HomePage2 extends StatelessWidget {
   const HomePage2({super.key});
 
   @override
@@ -275,7 +275,8 @@ void dispose(){
           child: Column(
             children: [
         
-          TextField(
+          //Jika mau tambahkan validator harus pakai TextFormField jangan TextField
+          TextFormField(
 
             //'controller' digunakan untuk dapat membaca teks yang diinput user pada 'TextField'
             //Selain itu, juga dapat memperbarui atau menghapus teks yang diinput
@@ -294,11 +295,33 @@ void dispose(){
               //'FloatingLabelBehavior.always' digunakan untuk 'hintText' selalu tampil di 'TextField' meskipun kita tidak klik 'TextField'
               floatingLabelBehavior: FloatingLabelBehavior.always,
             ),
+
+            validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Nama harus diisi, tidak boleh kosong';
+    }
+    if(value.length<2){
+      return 'Nama harus lebih dari 1 kata';
+    
+    }
+  
+  //RegExp (regular expression) kita pakai untuk menerima berbagai parameter
+  //'!' adalah operator negasi untuk membalikkan nilai hasil dari '.hasMatch(value)'
+  //'^' artinya string akan mulai dari apa dulu, dalam kasus ini huruf kapital
+  //'+' artinya kumpulan karakter sebelumnya harus muncul satu atau lebih kali secara berurutan
+  //'$' artinya akhir dari string yang ingin diuji
+  //'.hasMatch(value)' adalah fungsi yang digunakan untuk periksa apakah string 'value' cocok dengan RegExp
+    if (!RegExp(r'^[A-Z][A-Za-z]+$').hasMatch(value)){
+      return 'Huruf awal adalah kapital dan tidak boleh ada angka atau simbol';
+      
+    }
+    return null;
+  },
           ),
           
           const SizedBox(height: 20.0),
         
-          TextField(
+          TextFormField(
             controller: _phoneController,
                 decoration: const InputDecoration(
                   labelText: 'Nomor',
@@ -309,13 +332,35 @@ void dispose(){
                   fillColor: Color.fromARGB(255, 225, 213, 227),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
-        
+              validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Nomor harus diisi, tidak boleh kosong';
+    }
+    if(value.length<8){
+      return 'Nomor harus minimal 8 digit';
+    }
+    if(value.length>15){
+      return 'Nomor tidak boleh lebih dari 15 digit';
+    }
+    if (!RegExp(r'^0').hasMatch(value)){
+      return 'Nomor harus mulai dari angka 0';
+    }
+
+    return null;
+  },
           ),
         
           Padding(
             padding: const EdgeInsets.only(left: 283.0, top: 10.0),
             child: ElevatedButton(
-              onPressed: addContact, 
+              onPressed:(){
+                if (_formkey.currentState!.validate()){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
+                }
+                addContact();
+              }, 
               child: const Text('Submit'),
               style: ElevatedButton.styleFrom(
                  backgroundColor:const Color.fromARGB(255, 127, 39, 143),
