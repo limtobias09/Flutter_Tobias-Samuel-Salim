@@ -25,7 +25,7 @@ _Struktur Response_
 ## Dio
 Dio adalah sebuah package yang tersedia di pub.dev yang merupakan HTTP Client dan dimanfaatkan untuk melakukan REST API.
 
-## Serialisasi JSON
+## Serialisasi & Deserialisasi JSON
 JSON merupakan JavaScript Object Notation yang umumnya digunakan pada REST API. Cara penulisan data pada JSON biasanya dalam bentuk key dan value. 
 Serialisasi JSON yaitu mengubah struktur data ke bentuk JSON. Kita menggunakan fungsi jsonEncode dari package dart:convert yang sudah ada pada Flutter.
 Deserialisasi JSON merupakan kebalikan dari serialisasi JSON yaitu mengubah bentuk JSON ke struktur data.
